@@ -1,0 +1,19 @@
+{
+  "name": "plain-http",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "http": "^0.0.1-security",
+    "jest": "^26.6.3",
+    "lodash": "^4.17.20",
+    "nodemon": "^2.0.7"
+  }
+}
