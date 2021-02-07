@@ -1,7 +1,12 @@
-import server from "./server.js";
-import raw from "./getStaticData.js";
+import server from "./src/server.js";
+import getHtml from "./src/render/rawData.js";
+import render from "./src/render/render.js";
+import env from "./env.js";
+// import fileReader from "./src/fileReader";
+const [, , procPort] = process.argv;
+const data = await render();
 
-const data = await raw();
-
-const port = 9000;
-server(data).listen(port, () => console.log('server started'));
+const port = procPort || env.PORT;
+server(data.html).listen(port, () =>
+  console.log(`server started on port: ${port}`)
+);
