@@ -2,6 +2,9 @@ export default class Router {
   constructor() {
     this.route = {
       GET: {
+        '/favicon.ico': (req, res, data) => {
+          res.status(404).send();
+        },
         "/assets/(\\w+)/(\\w+).(\\w+)": (req, res, data) => {
           const [, name] = req.url.replace('/assets/', '').split('/');
           res.status(200);

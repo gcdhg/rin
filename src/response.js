@@ -17,7 +17,7 @@ export default class Router {
   getStatus() {
     return this._status;
   }
-  send(type = "html", toClient) {
+  send(type = "html", toClient = '') {
     const content = Router.mapping[type];
     this._res.writeHead(this._status, {
       "Content-Type": content,
