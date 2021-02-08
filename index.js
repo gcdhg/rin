@@ -12,6 +12,10 @@ router.get("/", async (_req, res, data) => {
   // res.sendStaticHTML("index");
 });
 
+router.get("/json", async (_req, res, data) => {
+  res.status(200).send("json", { title: "Hello there !!", general: "kenobi" });
+});
+
 const port = procPort || env.PORT;
 server(data, router).listen(port, () =>
   console.log(`server started on port: ${port}`)

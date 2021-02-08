@@ -17,17 +17,22 @@ export default class Router {
   getStatus() {
     return this._status;
   }
-  send(type = "html", toClient = '') {
-    const content = Router.mapping[type];
-    this._res.writeHead(this._status, {
-      "Content-Type": content,
-    });
-    if (content === "json") {
-      const data = JSON.stringify(toClient);
+  send(type = "html", toClient = "") {
+    try {
+      const content = Router.mapping[type];
+      let data = toClient;
+      if (type === "json") {
+        data = JSON.stringify(toClient).toString();
+      }
+      this._res.writeHead(this._status, {
+        "Content-Type": content,
+      });
+      this._res.write(data);
+      this._res.end();
+      return this;
+    } catch (err) {
+      this.status(404).send();
     }
-    this._res.write(toClient.toString());
-    this._res.end();
-    return this;
   }
   sendStatic(name) {
     const data = this._staticData;
