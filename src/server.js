@@ -1,4 +1,5 @@
 import http from "http";
+import Response from "./response.js";
 import { URL as Url } from "url";
 
 export default (data, router) =>
@@ -15,11 +16,11 @@ export default (data, router) =>
         if (!handler) {
           throw new Error("No such route");
         }
-        code = await handler(req, res, data, code);
-        console.log(req.method, req.url, code);
-        return true;
+        const response = new Response(res);
+        code = await handler(req, response, data, code);
+        console.log(req.method, req.url, response.getStatus());
       } catch (err) {
-        code = 404;
+        code = 500;
         console.log(req.method, req.url, code);
         console.log(err);
         res.writeHead(404);

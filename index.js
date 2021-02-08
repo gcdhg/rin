@@ -8,12 +8,8 @@ const data = await render();
 const router = new Router();
 
 router.get("/", async (_req, res, data) => {
-  res.writeHead(200, {
-    "Content-Type": "text/html",
-  });
-  res.write(data["index.html"].toString());
-  res.end();
-  return 200;
+  res.status(200);
+  res.send("html", data['index.html']);
 });
 
 const port = procPort || env.PORT;
