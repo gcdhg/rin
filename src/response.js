@@ -1,9 +1,9 @@
 export default class Router {
   static mapping = {
     html: "text/html",
-    css: "text/html",
-    js: "text/html",
-    json: "text/html",
+    css: "text/css",
+    js: "application/javascript",
+    json: "application/json",
   };
   constructor(res, data = "") {
     this._res = res;
