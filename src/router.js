@@ -1,11 +1,17 @@
 export default class Router {
   constructor() {
     this.route = {
-      GET: {},
+      GET: {
+        "/assets/(\\w+)/(\\w+).(\\w+)": (req, res, data) => {
+          const [, name] = req.url.replace('/assets/', '').split('/');
+          res.status(200);
+          res.sendStatic(name);
+        },
+      },
       POST: {},
       PUT: {},
       PATCH: {},
-      DELETE: {}
+      DELETE: {},
     };
   }
   get(path, cb) {

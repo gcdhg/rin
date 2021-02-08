@@ -4,27 +4,31 @@ import { URL as Url } from "url";
 
 export default (data, router) =>
   http.createServer(async (req, res) => {
+    const response = new Response(res, data);
     const body = [];
-    let code;
 
     req.on("data", async (chunk) => body.push(chunk));
     req.on("end", async () => {
       try {
         const url = new Url(req.url, `http://${req.headers.host}`);
-        const rout = router.getRouts()[req.method];
-        const handler = rout[url.pathname] || null;
+        const { pathname } = url;
+        const allRouts = router.getRouts();
+        const methodRouts = allRouts[req.method];
+        const validPath = Object.keys(methodRouts).find((path) => {
+          const regexp = new RegExp(`^${path}$`);
+          return pathname.match(regexp);
+        });
+        const handler = methodRouts[validPath];
         if (!handler) {
           throw new Error("No such route");
         }
-        const response = new Response(res);
-        code = await handler(req, response, data, code);
+        await handler(req, response, data);
         console.log(req.method, req.url, response.getStatus());
       } catch (err) {
-        code = 500;
-        console.log(req.method, req.url, code);
+        response.status(500);
+        console.log(req.method, req.url, response.getStatus());
         console.log(err);
-        res.writeHead(404);
-        res.end();
+        response.send();
       }
     });
   });
