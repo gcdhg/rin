@@ -22,7 +22,7 @@ export default (data, router) =>
         if (!handler) {
           throw new Error("No such route");
         }
-        await handler(req, response, data);
+        await handler(req, response, body);
         console.log(req.method, req.url, response.getStatus());
       } catch (err) {
         response.status(500);
