@@ -8,7 +8,7 @@ You need to have installed Node and NPM.
 Clone this repository
 
 ```shell
-git clone https://github.com/gtsopour/nodejs-shopping-cart.git
+git clone https://github.com/gcdhg/rin.git
 ```
 
 Install dependencies
