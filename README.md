@@ -29,7 +29,7 @@ or with nodemon
 npm run dev
 ```
 
-you can change port by changing `port` property in `env.js` or run with:
+you can change port by changing `PORT` property in `.env` or run with:
 
 ```shell
 npm run dev port

@@ -23,12 +23,13 @@ export default (data, router) =>
           throw new Error("No such route");
         }
         await handler(req, response, body);
-        console.log(req.method, req.url, response.getStatus());
       } catch (err) {
         response.status(500);
-        console.log(req.method, req.url, response.getStatus());
         console.log(err);
         response.send();
       }
     });
+    req.on("end", async () =>
+      console.log(req.method, req.url, response.getStatus())
+    );
   });

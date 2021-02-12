@@ -1,7 +1,8 @@
 import server from "./src/server.js";
 import render from "./src/render.js";
 import Router from "./src/router.js";
-import env from "./env.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 const [, , procPort] = process.argv;
 const data = await render();
@@ -11,7 +12,6 @@ const serverData = [];
 
 router.get("/", async (_req, res, data) => {
   res.status(200).sendStatic("index.html");
-  // res.sendStaticHTML("index");
 });
 router.post("/", async (_req, res, body) => {
   serverData.push(body.toString());
@@ -27,7 +27,7 @@ router.get("/json", async (_req, res, body) => {
   res.status(200).send("json", { title: "Hello there !!", general: "kenobi" });
 });
 
-const port = procPort || env.PORT;
+const port = procPort || process.env.PORT;
 server(data, router).listen(port, () =>
   console.log(`server started on port: ${port}`)
 );
