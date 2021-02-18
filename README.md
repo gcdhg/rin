@@ -1,6 +1,6 @@
 # RIN
 
-simple atemplt on node.js to create web app on native node.js http library.
+simple attempt on node.js to create web app on native node.js http library.
 
 ## Run locally on your machine
 
